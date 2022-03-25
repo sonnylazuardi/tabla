@@ -24,7 +24,7 @@ const gallery = [
   },
   {
     label: 'Nerdle 🧮',
-    value: 'https://globe-game.com'
+    value: 'https://nerdlegame.com/'
   }, 
   {
     label: 'Keclap 🇮🇩',
@@ -34,6 +34,18 @@ const gallery = [
     label: 'Batangan 🇮🇩',
     value: 'https://batangan.lantip.xyz/'
   }, 
+  {
+    label: 'Chengyu 🇨🇳',
+    value: 'https://cheeaun.github.io/chengyu-wordle/'
+  },
+  {
+    label: 'Word-leh 🇸🇬',
+    value: 'https://www.word-leh.com/'
+  },
+  {
+    label: 'Ketapat 🇲🇾',
+    value: 'https://www.projecteugene.com/katapat.html'
+  }
 ]
 
 export default function WordleGallery({ field, input, meta }: any) {

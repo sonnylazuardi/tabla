@@ -94,7 +94,6 @@ const Home: NextPage = () => {
 
   React.useEffect(() => {
     const unsubscribe = subscribe("gallery", (result: any) => {
-      console.log(result);
       form.updateValues({
         rawJson: {
           website: [result.value, ...data.rawJson.website],
