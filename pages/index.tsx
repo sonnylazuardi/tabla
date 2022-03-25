@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 
   const defaultData = {
     darkMode: darkMode.value,
-    rawJson: {website: ['https://www.nytimes.com/games/wordle/index.html', 'https://worldle.teuteuf.fr/']}
+    rawJson: {website: []}
   };
   
   const cms = useCMS();
@@ -58,6 +58,15 @@ const Home: NextPage = () => {
       document.body.scrollLeft += event.deltaY;
     }, { passive: false });
     const pool = setInterval(() => setDateState(new Date()), 30000);
+
+    if (!(typeof window !== 'undefined' && window.localStorage.getItem('tabla')?.length)) {
+      form.updateValues({
+        rawJson: {website: [
+          'https://www.nytimes.com/games/wordle/index.html', 'https://worldle.teuteuf.fr/'
+        ]}
+      })
+    }
+
     return () => {
       clearInterval(pool);
     }
