@@ -89,8 +89,8 @@ const Home: NextPage = () => {
         {data.rawJson.website.length === 0 ? <div>Add your website <a href="#" className='text-red-500' onClick={() => cms.enable()}>here</a></div> : null}
           {data.rawJson.website.map((item: any, i: number) => {
             return (
-              <div className="tab" key={i}>
-                <iframe style={frameStyle} src={item} {...(item.toLowerCase().includes('nytimes.com/games/wordle')? {is: 'x-frame-bypass'} : null)} />
+              <div className="tab" key={'tab-'+item}>
+                <iframe loading="lazy" style={frameStyle} src={item} {...(item.toLowerCase().includes('nytimes.com/games/wordle')? {is: 'x-frame-bypass'} : null)} />
               </div>
             )
           })}
