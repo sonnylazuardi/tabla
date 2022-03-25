@@ -18,6 +18,7 @@ const Home: NextPage = () => {
       <Head>
         <title>Tabla</title>
         <link rel="icon" href="/favicon.ico" />
+        <script type="module" src="https://unpkg.com/figma-plugin-bypass"></script>
       </Head>
       
       <div className="absolute top-0 left-0 right-0 pt-16">
