@@ -7,18 +7,22 @@ import useDarkMode from "use-dark-mode";
 import { useForm, usePlugin, useCMS } from 'tinacms';
 import { renderGreetings } from '../utils';
 
+import { subscribe } from "../utils/pubsub"
+
 const Home: NextPage = () => {
   const darkMode = useDarkMode();
   const [dateState, setDateState] = React.useState(new Date());
 
   const handleDataChange = async (data: any) => {
     typeof window !== 'undefined' && window.localStorage.setItem('tabla', JSON.stringify(data));
-    console.log('Submitting', data);
+    
     if (data.darkMode) {
       darkMode.enable();
     } else if (!data.darkMode) {
       darkMode.disable();
     }
+
+    console.log('Submitting', data);
   };
   
   const cms = useCMS();
@@ -26,7 +30,6 @@ const Home: NextPage = () => {
     id: '',
     label: 'Settings',
     fields: [
-      { name: 'darkMode', label: 'Dark Mode', component: 'toggle' },
       { name: 'title', label: 'Title', component: 'text' },
       {
         label: 'Website Links',
@@ -36,13 +39,22 @@ const Home: NextPage = () => {
           component: 'text',
         },
       },
+      {
+        label: 'Wordle Gallery',
+        name: 'gallery',
+        component: 'wordle-gallery',
+      },
+      { name: 'darkMode', label: 'Dark Mode', component: 'toggle' },
     ],
     initialValues: {
       darkMode: darkMode.value,
       title: `{greetings} Tabla`,
-      rawJson: {website: []}
+      rawJson: {website: []},
+      gallery: '',
     },
-    onChange: ({ values }: any) => handleDataChange(values),
+    onChange: ({ values }: any) => {
+      handleDataChange(values);
+    },
     onSubmit: (values: any) => {
       handleDataChange(values);
       document.body.style.paddingLeft = '0';
@@ -54,7 +66,7 @@ const Home: NextPage = () => {
 
   React.useEffect(() => {
     document.body.addEventListener("mousewheel", function (event: any) {
-      event.preventDefault();
+      // event.preventDefault();
       document.body.scrollLeft += event.deltaY;
     }, { passive: false });
     const pool = setInterval(() => setDateState(new Date()), 30000);
@@ -69,10 +81,28 @@ const Home: NextPage = () => {
       form.updateValues(JSON.parse(window.localStorage.getItem('tabla') || '{}'));
     }
 
+    import('../components/WordleGallery').then(({ wordleGalleryFieldPlugin }) => {
+      cms.fields.add(wordleGalleryFieldPlugin);
+    });
+
+    
+
     return () => {
       clearInterval(pool);
     }
   }, [])
+
+  React.useEffect(() => {
+    const unsubscribe = subscribe("gallery", (result: any) => {
+      console.log(result);
+      form.updateValues({
+        rawJson: {
+          website: [result.value, ...data.rawJson.website],
+        }
+      });
+    })
+    return unsubscribe;
+  }, [data]);
   return (
     <div className="app relative">
       <Head>

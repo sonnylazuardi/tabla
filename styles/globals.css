@@ -41,6 +41,13 @@ body.dark-mode .dark-bg {
   @apply w-full;
 }
 
+.chip {
+  @apply mb-2 cursor-pointer rounded-full bg-white px-3 py-1 shadow-sm;
+}
+.chip:hover {
+  @apply bg-neutral-300;
+}
+
 .app {
   display: flex;
   flex: 1;
