@@ -35,7 +35,7 @@ const Home: NextPage = () => {
         field: {
           component: 'text',
         },
-      }
+      },
     ],
     initialValues: {
       darkMode: darkMode.value,
@@ -79,6 +79,7 @@ const Home: NextPage = () => {
         <title>Tabla</title>
         <link rel="icon" href="/favicon.ico" />
         <script type="module" src="https://unpkg.com/figma-plugin-bypass"></script>
+        <script async src="https://cdn.splitbee.io/sb.js"></script>
       </Head>
       
       <div className="fixed top-0 left-0 right-0 pt-6">
