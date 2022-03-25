@@ -70,10 +70,10 @@ const Home: NextPage = () => {
         <script type="module" src="https://unpkg.com/figma-plugin-bypass"></script>
       </Head>
       
-      <div className="absolute top-0 left-0 right-0 pt-16">
+      <div className="fixed top-0 left-0 right-0 pt-8">
         <h2 className='order-first font-semibold text-lg tracking-wide text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>Tabla</h2>
-        <h1 className='text-6xl font-extrabold uppercase text-transparent tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>{format(dateState, "hh.mm aaaaa'm'")}</h1>
-        <div className='text-2xl'>{format(dateState, "LLLL dd", {locale: enUS})}</div>
+        <h1 className='text-4xl font-extrabold uppercase text-transparent tracking-tighest sm:text-5xl lg:text-7xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>{format(dateState, "hh.mm aaaaa'm'")}</h1>
+        <div className='text-xl'>{format(dateState, "LLLL dd", {locale: enUS})}</div>
         <button className="absolute top-4 right-4 w-10 h-10 flex justify-center items-center bg-opacity-20 rounded-full dark-bg" onClick={() => {
           if (cms.enabled) { 
             document.body.style.paddingLeft = '0';
@@ -85,7 +85,7 @@ const Home: NextPage = () => {
           <img src='/settings.svg' alt='settings' className='w-6 h-6'/>
         </button>
       </div>
-      <div className="wrap space-x-4 p-4 pb-16">
+      <div className="wrap space-x-4 p-4 pb-8">
         {data.rawJson.website.length === 0 ? <div>Add your website <a href="#" className='text-red-500' onClick={() => cms.enable()}>here</a></div> : null}
           {data.rawJson.website.map((item: any, i: number) => {
             return (
