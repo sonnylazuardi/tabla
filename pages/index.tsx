@@ -90,7 +90,7 @@ const Home: NextPage = () => {
           {data.rawJson.website.map((item: any, i: number) => {
             return (
               <div className="tab" key={'tab-'+item}>
-                <iframe loading="lazy" style={frameStyle} src={item} {...(item.toLowerCase().includes('nytimes.com/games/wordle')? {is: 'x-frame-bypass'} : null)} />
+                <iframe loading="lazy" key={'frame-'+item} style={frameStyle} src={item} {...(item.toLowerCase().includes('nytimes.com/games/wordle')? {is: 'x-frame-bypass'} : null)} />
               </div>
             )
           })}
