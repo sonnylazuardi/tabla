@@ -5,7 +5,7 @@ import Head from 'next/head'
 import React from 'react';
 import useDarkMode from "use-dark-mode";
 import { useForm, usePlugin, useCMS } from 'tinacms';
-import { Website } from '../components/blocks';
+import { renderGreetings } from '../utils';
 
 const Home: NextPage = () => {
   const darkMode = useDarkMode();
@@ -27,6 +27,7 @@ const Home: NextPage = () => {
     label: 'Settings',
     fields: [
       { name: 'darkMode', label: 'Dark Mode', component: 'toggle' },
+      { name: 'title', label: 'Title', component: 'text' },
       {
         label: 'Website Links',
         name: 'rawJson.website',
@@ -38,6 +39,7 @@ const Home: NextPage = () => {
     ],
     initialValues: {
       darkMode: darkMode.value,
+      title: `{greetings} Tabla`,
       rawJson: {website: []}
     },
     onChange: ({ values }: any) => handleDataChange(values),
@@ -80,9 +82,9 @@ const Home: NextPage = () => {
       </Head>
       
       <div className="fixed top-0 left-0 right-0 pt-6">
-        <h2 className='order-first font-semibold text-lg tracking-wide text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>Tabla</h2>
+        <h2 className='text-sm font-semibold lg:text-lg tracking-wide text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>{renderGreetings(data.title)}</h2>
         <h1 className='text-2xl font-extrabold uppercase text-transparent tracking-tighest sm:text-3xl lg:text-5xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>{format(dateState, "hh.mm aaaaa'm'")}</h1>
-        <div className='text-xl'>{format(dateState, "LLLL dd", {locale: enUS})}</div>
+        <div className='text-sm lg:text-xl'>{format(dateState, "EEEE, LLLL dd", {locale: enUS})}</div>
         <button className="absolute top-4 right-4 w-10 h-10 flex justify-center items-center bg-opacity-20 rounded-full dark-bg" onClick={() => {
           if (cms.enabled) { 
             document.body.style.paddingLeft = '0';
@@ -98,8 +100,8 @@ const Home: NextPage = () => {
         {data.rawJson.website.length === 0 ? <div>Add your website <a href="#" className='text-red-500' onClick={() => cms.enable()}>here</a></div> : null}
           {data.rawJson.website.map((item: any, i: number) => {
             return (
-              <div className="tab" key={'tab-'+item}>
-                <iframe loading="lazy" key={'frame-'+item} style={frameStyle} src={item} {...(item.toLowerCase().includes('nytimes.com/games/wordle')? {is: 'x-frame-bypass'} : null)} />
+              <div className="tab" key={i}>
+                <iframe loading="lazy" style={frameStyle} src={item} {...(item.toLowerCase().includes('nytimes.com/games/wordle')? {is: 'x-frame-bypass'} : null)} />
               </div>
             )
           })}

@@ -31,10 +31,14 @@ body.light-mode .dark-bg {
   @apply bg-neutral-800 bg-opacity-30;
 }
 body.dark-mode {
-  @apply bg-neutral-900 text-neutral-300;
+  @apply bg-neutral-900 text-neutral-400;
 }
 body.dark-mode .dark-bg {
   @apply bg-neutral-200 bg-opacity-30;
+}
+
+.relative.mb-5 {
+  @apply w-full;
 }
 
 .app {
