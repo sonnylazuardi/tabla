@@ -31,6 +31,8 @@ const Home: NextPage = () => {
     label: 'Settings',
     fields: [
       { name: 'title', label: 'Title', component: 'text' },
+      {name: 'background', label: 'Background Image', component: 'text'},
+      {name: 'useBg', label: 'Use Background Image', component: 'toggle'},
       {
         label: 'Website Links',
         name: 'rawJson.website',
@@ -48,6 +50,8 @@ const Home: NextPage = () => {
     ],
     initialValues: {
       darkMode: darkMode.value,
+      background: 'https://source.unsplash.com/random/1360x800?indonesia,night',
+      useBg: true,
       title: `{greetings} Tabla`,
       rawJson: {website: []},
       gallery: '',
@@ -102,8 +106,9 @@ const Home: NextPage = () => {
     })
     return unsubscribe;
   }, [data]);
+  const bgStyle: any = data.useBg ? {backgroundImage: `url(${data.background})`, backgroundSize: 'cover', backgroundRepeat: 'none'} : null;
   return (
-    <div className="app relative">
+    <div className="app relative" style={bgStyle}>
       <Head>
         <title>Tabla</title>
         <link rel="icon" href="/favicon.ico" />
@@ -111,10 +116,12 @@ const Home: NextPage = () => {
         <script async src="https://cdn.splitbee.io/sb.js"></script>
       </Head>
       
-      <div className="fixed top-0 left-0 right-0 pt-6">
-        <h2 className='text-sm font-semibold lg:text-lg tracking-wide text-transparent bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>{renderGreetings(data.title)}</h2>
-        <h1 className='text-2xl font-extrabold uppercase text-transparent tracking-tighest sm:text-3xl lg:text-5xl bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 bg-clip-text'>{format(dateState, "hh.mm aaaaa'm'")}</h1>
-        <div className='text-sm lg:text-xl'>{format(dateState, "EEEE, LLLL dd", {locale: enUS})}</div>
+      <div className="fixed top-0 left-0 right-0 pt-6 flex justify-center">
+        <div className='py-4 px-8 bg-black/10 backdrop-blur-lg rounded-2xl'>
+          <h2 className='text-sm font-semibold lg:text-lg tracking-wide text-transparent'>{renderGreetings(data.title)}</h2>
+          <h1 className='text-2xl font-extrabold uppercase text-transparent tracking-tighest sm:text-3xl lg:text-5xl'>{format(dateState, "hh.mm aaaaa'm'")}</h1>
+          <div className='text-sm lg:text-xl'>{format(dateState, "EEEE, LLLL dd", {locale: enUS})}</div>
+        </div>
         <button className="absolute top-4 right-4 w-10 h-10 flex justify-center items-center bg-opacity-20 rounded-full dark-bg" onClick={() => {
           if (cms.enabled) { 
             document.body.style.paddingLeft = '0';

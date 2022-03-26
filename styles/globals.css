@@ -24,17 +24,26 @@ body {
 }
 
 body.light-mode {
-  @apply bg-neutral-50 text-neutral-600;
+  @apply bg-neutral-50 text-neutral-500;
   transition: background-color 0.3s ease;
 }
 body.light-mode .dark-bg {
   @apply bg-neutral-800 bg-opacity-30;
 }
+body.light-mode h1,
+body.light-mode h2 {
+  @apply text-neutral-700;
+}
+
 body.dark-mode {
-  @apply bg-neutral-900 text-neutral-400;
+  @apply bg-neutral-900 text-neutral-300;
 }
 body.dark-mode .dark-bg {
   @apply bg-neutral-200 bg-opacity-30;
+}
+body.dark-mode h1,
+body.dark-mode h2 {
+  @apply text-neutral-50;
 }
 
 .relative.mb-5 {
