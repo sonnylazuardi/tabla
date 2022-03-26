@@ -50,7 +50,7 @@ const Home: NextPage = () => {
     ],
     initialValues: {
       darkMode: darkMode.value,
-      background: 'https://source.unsplash.com/random/1360x800?indonesia,night',
+      background: 'indonesia,night',
       useBg: true,
       title: `{greetings} Tabla`,
       rawJson: {website: []},
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
     })
     return unsubscribe;
   }, [data]);
-  const bgStyle: any = data.useBg ? {backgroundImage: `url(${data.background})`, backgroundSize: 'cover', backgroundRepeat: 'none'} : null;
+  const bgStyle: any = data.useBg ? {backgroundImage: `url('https://source.unsplash.com/random/1360x800?${data.background}')`, backgroundSize: 'cover', backgroundRepeat: 'none'} : null;
   return (
     <div className="app relative" style={bgStyle}>
       <Head>
