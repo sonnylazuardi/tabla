@@ -42,7 +42,7 @@ const Home: NextPage = () => {
         },
       },
       {
-        label: 'Wordle Gallery',
+        label: 'Gallery',
         name: 'gallery',
         component: 'wordle-gallery',
       },
@@ -78,7 +78,7 @@ const Home: NextPage = () => {
     if (!(typeof window !== 'undefined' && window.localStorage.getItem('tabla')?.length)) {
       form.updateValues({
         rawJson: {website: [
-          'https://www.nytimes.com/games/wordle/index.html', 'https://worldle.teuteuf.fr/'
+          'https://www.nytimes.com/games/wordle/index.html', 'https://producthunt.com/', 'https://news.ycombinator.com/'
         ]}
       })
     } else {
@@ -107,6 +107,8 @@ const Home: NextPage = () => {
     return unsubscribe;
   }, [data]);
   const bgStyle: any = data.useBg ? {backgroundImage: `url('${data.bgImage}')`, backgroundSize: 'cover', backgroundRepeat: 'none'} : null;
+  const whitelist = ['nytimes.com', 'news.ycombinator.com', 'producthunt.com', 'reddit.com'];
+  const isProxy = (item: string) => whitelist.some(v => item.toLowerCase().includes(v));
   return (
     <div className="app relative" style={bgStyle}>
       <Head>
@@ -134,15 +136,15 @@ const Home: NextPage = () => {
         </button>
       </div>
       <div className="wrap space-x-6 p-4 pb-6">
-        {data.rawJson.website.length === 0 ? <div>Add your website <a href="#" className='text-red-500' onClick={() => cms.enable()}>here</a></div> : null}
-          {data.rawJson.website.map((item: any, i: number) => {
-            return (
-              <div className="tab" key={i}>
-                <iframe loading="lazy" style={frameStyle} src={item} {...(item.toLowerCase().includes('nytimes.com/games/wordle')? {is: 'x-frame-bypass'} : null)} />
-              </div>
-            )
-          })}
-        </div>
+        {data.rawJson.website.length === 0 ? <div onClick={() => cms.enable()} className='bg-black/10 backdrop-blur-lg rounded-xl shadow-xl mb-10 flex justify-center items-center cursor-pointer' style={{width: 320, height: 500}}>Get started!<br />Add your website link</div> : null}
+        {data.rawJson.website.map((item: any, i: number) => {
+          return (
+            <div className="tab" key={i}>
+              <iframe loading="lazy" style={frameStyle} src={item} {...(isProxy(item) ? {is: 'x-frame-bypass'} : null)} />
+            </div>
+          )
+        })}
+      </div>
         
     </div>
   )

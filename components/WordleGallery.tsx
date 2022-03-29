@@ -3,6 +3,14 @@ import { publish } from "../utils/pubsub"
 
 const gallery = [
   {
+    label: 'Product Hunt 🐱',
+    value: 'https://producthunt.com'
+  },
+  {
+    label: 'Hacker News 📰',
+    value: 'https://news.ycombinator.com',
+  },
+  {
     label: 'Wordle 🇺🇸',
     value: 'https://www.nytimes.com/games/wordle/index.html'
   },
@@ -53,7 +61,7 @@ export default function WordleGallery({ field, input, meta }: any) {
     <>
       <div className="mb-6">
         <div className="mb-4">
-          <label className="font-bold text-sm">Wordle Gallery (Quick Add)</label>
+          <label className="font-bold text-sm">Gallery</label>
         </div>
         <div className='w-full flex flex-row flex-wrap space-x-2'>
           {gallery.map((item, i: number) => {
