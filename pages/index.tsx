@@ -136,7 +136,13 @@ const Home: NextPage = () => {
         </button>
       </div>
       <div className="wrap space-x-6 p-4 pb-6">
-        {data.rawJson.website.length === 0 ? <div onClick={() => cms.enable()} className='bg-black/10 backdrop-blur-lg rounded-xl shadow-xl mb-10 flex justify-center items-center cursor-pointer' style={{width: 320, height: 500}}>Get started!<br />Add your website link</div> : null}
+        {data.rawJson.website.length === 0 ? 
+          <div onClick={() => cms.enable()} className='bg-black/10 backdrop-blur-lg rounded-xl shadow-xl mb-10 flex flex-col justify-center items-center cursor-pointer' style={{width: 320, height: 500}}>
+            <img src='/news.svg' alt='settings' className='w-10 h-10'/><br />
+            Get started!<br />
+            Add your website link
+          </div>
+          : null}
         {data.rawJson.website.map((item: any, i: number) => {
           return (
             <div className="tab" key={i}>
