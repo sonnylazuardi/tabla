@@ -78,6 +78,7 @@ const Home: NextPage = () => {
     if (!(typeof window !== 'undefined' && window.localStorage.getItem('tabla')?.length)) {
       form.updateValues({
         rawJson: {website: [
+          'https://worldle.teuteuf.fr/', 'https://nerdlegame.com/',
           'https://www.nytimes.com/games/wordle/index.html', 'https://news.ycombinator.com/'
         ]}
       })
