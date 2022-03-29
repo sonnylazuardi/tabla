@@ -78,7 +78,7 @@ const Home: NextPage = () => {
     if (!(typeof window !== 'undefined' && window.localStorage.getItem('tabla')?.length)) {
       form.updateValues({
         rawJson: {website: [
-          'https://www.nytimes.com/games/wordle/index.html', 'https://producthunt.com/', 'https://news.ycombinator.com/'
+          'https://www.nytimes.com/games/wordle/index.html', 'https://news.ycombinator.com/'
         ]}
       })
     } else {
@@ -107,7 +107,7 @@ const Home: NextPage = () => {
     return unsubscribe;
   }, [data]);
   const bgStyle: any = data.useBg ? {backgroundImage: `url('${data.bgImage}')`, backgroundSize: 'cover', backgroundRepeat: 'none'} : null;
-  const whitelist = ['nytimes.com', 'news.ycombinator.com', 'producthunt.com', 'reddit.com'];
+  const whitelist = ['nytimes.com', 'news.ycombinator.com', 'producthunt.com', 'reddit.com', 'detik.com', 'today.line.me'];
   const isProxy = (item: string) => whitelist.some(v => item.toLowerCase().includes(v));
   return (
     <div className="app relative" style={bgStyle}>
@@ -124,6 +124,9 @@ const Home: NextPage = () => {
           <h1 className='text-2xl font-extrabold uppercase text-transparent tracking-tighest sm:text-3xl lg:text-5xl'>{format(dateState, "hh.mm aaaaa'm'")}</h1>
           <div className='text-sm lg:text-xl'>{format(dateState, "EEEE, LLLL dd", {locale: enUS})}</div>
         </div>
+        <a href="https://chrome.google.com/webstore/detail/tabla/bboagehkflhnhilkpeikaabifiklmpbk" data-splitbee-event="Install Extension" className="hidden md:flex absolute top-4 right-16 h-10 px-4 justify-center items-center bg-opacity-20 rounded-full dark-bg text-sm">
+          <img src='/chrome.svg' alt='settings' className='w-6 h-6 mr-2'/> Install Extension
+        </a>
         <button className="absolute top-4 right-4 w-10 h-10 flex justify-center items-center bg-opacity-20 rounded-full dark-bg" onClick={() => {
           if (cms.enabled) { 
             document.body.style.paddingLeft = '0';

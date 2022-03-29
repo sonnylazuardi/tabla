@@ -1,0 +1,13 @@
+{
+  "name": "Tabla",
+  "description": "Customize the new tab with multiple websites in one tab",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {
+    "512": "logotabla512.png"
+  },
+  "action": {},
+  "chrome_url_overrides": {
+    "newtab": "tab.html"
+  }
+}
