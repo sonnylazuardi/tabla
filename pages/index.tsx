@@ -50,7 +50,7 @@ const Home: NextPage = () => {
     ],
     initialValues: {
       darkMode: darkMode.value,
-      bgImage: 'https://source.unsplash.com/random/1360x800?city',
+      bgImage: 'https://tabla.vercel.app/bg.svg',
       useBg: true,
       title: `{greetings} Tabla`,
       rawJson: {website: []},
@@ -106,7 +106,7 @@ const Home: NextPage = () => {
     })
     return unsubscribe;
   }, [data]);
-  const bgStyle: any = data.useBg ? {backgroundImage: `url('${data.background}')`, backgroundSize: 'cover', backgroundRepeat: 'none'} : null;
+  const bgStyle: any = data.useBg ? {backgroundImage: `url('${data.bgImage}')`, backgroundSize: 'cover', backgroundRepeat: 'none'} : null;
   return (
     <div className="app relative" style={bgStyle}>
       <Head>
@@ -116,8 +116,8 @@ const Home: NextPage = () => {
         <script async src="https://cdn.splitbee.io/sb.js"></script>
       </Head>
       
-      <div className="fixed top-0 left-0 right-0 pt-6 flex justify-center">
-        <div className='py-4 px-8 bg-black/10 backdrop-blur-lg rounded-2xl'>
+      <div className="fixed top-0 left-0 right-0 flex justify-center">
+        <div className='py-4 px-8 bg-black/10 backdrop-blur-lg rounded-2xl rounded-t-none'>
           <h2 className='text-sm font-semibold lg:text-lg tracking-wide text-transparent'>{renderGreetings(data.title)}</h2>
           <h1 className='text-2xl font-extrabold uppercase text-transparent tracking-tighest sm:text-3xl lg:text-5xl'>{format(dateState, "hh.mm aaaaa'm'")}</h1>
           <div className='text-sm lg:text-xl'>{format(dateState, "EEEE, LLLL dd", {locale: enUS})}</div>
